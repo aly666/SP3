@@ -4,7 +4,7 @@ metadata:
   name: fb
   namespace: production
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: fb
@@ -17,7 +17,7 @@ spec:
         - name: dockerhub-private
       containers:
       - name: fb
-        image: aly666/aly666/fb-prod:1.0.2
+        image: aly666/fb-prod:1.0.2
         ports:
         - containerPort: 80
         env:
