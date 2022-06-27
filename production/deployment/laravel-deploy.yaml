@@ -4,7 +4,7 @@ metadata:
   name: laravel-service
   namespace: production
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: laravel
   ports:
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wp-pv-claim
+  name: lv-pv-claim
   namespace: production
 spec:
   accessModes:
@@ -45,12 +45,17 @@ spec:
           env:
             - name: LARAVEL_DB_HOST
               value: mysql.production.svc.cluster.local
-            - name: LARAVEL_DB_PASSWORD
+            - name: LARAVEL_DB_USER
               valueFrom:
                 secretKeyRef:
                   name: my-pass-lr
-                  key: MYSQL_ROOT_PASSWORD
-            - name: LARAVEL_DB_USER
+                  key: DB_USER
+            - name: LARAVEL_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: my-pass-lr
+                  key: DB_PASS      
+            - name: LARAVEL_DB_USERNAME
               value: root
             - name: LARAVEL_DB_NAME
               value: laravel
@@ -63,4 +68,4 @@ spec:
       volumes:
         - name: laravel-data
           persistentVolumeClaim:
-            claimName: wp-pv-claim
+            claimName: lv-pv-claim
