@@ -44,7 +44,7 @@ spec:
           image: aly666/laravel:0.0.6-stag
           env:
             - name: LARAVEL_DB_HOST
-              value: mysql.staging.svc.cluster.local
+              value: mysql-service-laravel.staging.svc.cluster.local
             - name: LARAVEL_DB_PASSWORD
               valueFrom:
                 secretKeyRef:

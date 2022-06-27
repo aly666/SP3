@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service-wordpress
+  name: mysql-service-laravel
   namespace: staging
 spec:
   ports:
@@ -13,7 +13,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim-wp
+  name: mysql-pv-claim-lv
   namespace: staging
 spec:
   accessModes:
@@ -43,7 +43,7 @@ spec:
           - "--ignore-db-dir=lost+found"
         envFrom:
           - secretRef:
-              name: my-pass-wp
+              name: my-pass-lr
         ports:
           - containerPort: 3306
         volumeMounts:
@@ -52,5 +52,6 @@ spec:
       volumes:
       - name: mysql-data
         persistentVolumeClaim:
-          claimName: mysql-pv-claim-wp
+          claimName: mysql-pv-claim-lv
+
 

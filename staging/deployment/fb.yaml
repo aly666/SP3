@@ -15,13 +15,13 @@ spec:
       imagePullSecrets:
         - name: dockerhub-private
       containers:
-      - name: fb-prod
+      - name: fb-staging
         image: aly666/aly666/fb-stag:1.0.3-staging
         ports:
         - containerPort: 80
         env:
         - name: DB_HOST
-          value: database-1.ctfbz2p2huco.ap-southeast-1.rds.amazonaws.com
+          value: mysql-sevice-fb.staging.svc.cluster.local
         - name: DB_USER
           valueFrom:
             secretKeyRef:

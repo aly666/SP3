@@ -4,7 +4,7 @@ metadata:
   name: wordpress-service
   namespace: staging
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: wordpress
   ports:
@@ -44,7 +44,7 @@ spec:
           image: wordpress:5.8.3-php7.4-apache
           env:
             - name: WORDPRESS_DB_HOST
-              value: mysql-service.staging.svc.cluster.local
+              value: mysql-service-wordpress.staging.svc.cluster.local
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
